@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Número Aleatorio</title>
+    <style>
+        *{
+            text-align: center; /*Alinear todo al centro*/
+			
+        }
+        #cabecera{
+            color: darkgreen; /*Dar color verde*/
+            font-size: 3em; /*Tamaño de la fuente*/
+        }
+        #Resultado{
+            color: chocolate; /*Dar color marron*/
+            font-size: 2em; 
+        }
+        img { 
+            width: 200px; /*Ajustar tamaño de la imagen*/
+            height: 100px; 
+        }
+
+    </style>
+    <script>
+        
+     // Zona variables
+        
+     var min;
+     var max;
+     var Salida;
+	 var imagen; 
+	 var audio;
+        
+        //1º Función doy valor a las variables y genero número aleatorio.
+        
+        function generar(){
+            min = Number(document.getElementById("minimo").value);
+            max = Number(document.getElementById("maximo").value);
+            Salida = Math.floor((Math.random()* (max - min +1)) ) + min;
+        }
+        
+        //2º Función Valido que los números introducidos sean correctos.
+        
+        function validar(){
+            generar();
+        if (isNaN(min) || isNaN(max)){
+                document.getElementById("Resultado").innerHTML = "Introduzca un número"; //En caso de error de número no introducido mostrara esto.
+        }else if (min <0 || max >999999999){
+                document.getElementById("Resultado").innerHTML = "Uno de los números introducidos es menor que 0 o mayor que [999.999.999]"; //En caso de error de intervalo númerico mostrara esto.
+        }else if (min >= max){
+                document.getElementById("Resultado").innerHTML = "El número mínimo no debe de ser mayor que el máximo"; //En caso de error número mínimo mayor mostrara esto.
+        }else
+                document.getElementById("Resultado").innerHTML = Salida; //Si no hay ningún error sacara el número por pantalla.
+        }
+        //3º Función asignar a los números de 0 a 10 imagenes y audios.
+        function imagenes(){
+            validar();
+            if (Salida ===0){
+                imagen ="imagenes/imagen0.png";
+				audio = "sonidos/cero.ogg";
+            }else if(Salida ===1){
+                imagen ="imagenes/imagen1.png";
+				audio = "sonidos/uno.ogg";
+            }else if (Salida ===2){
+                imagen ="imagenes/imagen2.png";
+				audio = "sonidos/dos.ogg";
+            }else if (Salida ===3){
+                imagen ="imagenes/imagen3.png";
+				audio = "sonidos/tres.ogg";
+            }else if (Salida ===4){
+                imagen ="imagenes/imagen4.png";
+				audio = "sonidos/cuatro.ogg";
+            }else if (Salida ===5){
+                imagen ="imagenes/imagen5.png";
+				audio = "sonidos/cinco.ogg";
+            }else if (Salida ===6){
+                imagen ="imagenes/imagen6.png";
+				audio = "sonidos/seis.ogg";
+            }else if (Salida ===7){
+                imagen ="imagenes/imagen7.png";
+				audio = "sonidos/siete.ogg";
+            }else if (Salida ===8){
+                imagen ="imagenes/imagen8.png";
+				audio = "sonidos/ocho.ogg";
+            }else if (Salida ===9){
+                imagen ="imagenes/imagen9.png";
+				audio = "sonidos/nueve.ogg";
+            }else if (Salida ===10){
+                imagen ="imagenes/imagen10.png";
+				audio = "sonidos/diez.ogg";
+            }else{
+                imagen ="imagenes/numeros.png"; //Al resto de números y errores les asigno la foto de numeros.
+				audio = "sonidos/numero.ogg"; //Al resto de números y errores les asigno el audio de numeros.
+			} 
+			document.getElementById("1").setAttribute( "src", imagen );
+			document.getElementById("audio").setAttribute( "src", audio );
+			document.getElementById("audio").load();
+        }
+    </script>
+</head>
+<body>  
+    <h1 id="cabecera"> Generar número aleatorio</h1> <!-- Cabecera Documento -->
+   <p> Seleccione el valor mínimo y máximo para el rango de valores a generar.</p>
+    
+    Mínimo: <input id="minimo"/> <!-- Barra input mínimo -->
+    Máximo: <input id="maximo"/> <!-- Barra input máximo -->
+    <button id="boton" onclick="imagenes()">Generar</button> <!-- Botón que activa funciones -->
+    <h1 id="Resultado"></h1> <!-- h1 para la salida -->
+    <img id = "1" src = "imagenes/blanco.png" alt = "imagen blanco"> <!-- img para poner imágenes -->
+    
+    <audio id="audio" autoplay hidden src="sonidos/numero.ogg"></audio> <!-- audio para poner sonidos -->
+</body>
+</html>
